@@ -1,13 +1,16 @@
 version: '2'
 services:
   kanboard:
-    image: kanboard/kanboard:latest
+    build:
+      .
     ports:
-     - "80:80"
-     - "443:443"
+     - "2000:80"
+     - "2001:443"
+    environment:
+     - KANBOARD_URL=http://leo-interop.prod.asteralabs.com/kanboard/
     volumes:
-     - kanboard_data:/var/www/app/data
-     - kanboard_plugins:/var/www/app/plugins
+     - kanboard_data:/var/www/app/kanboard/data
+     - kanboard_plugins:/var/www/app/kanboard/plugins
      - kanboard_ssl:/etc/nginx/ssl
 volumes:
   kanboard_data:

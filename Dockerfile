@@ -8,8 +8,8 @@ LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.url=https://kanboard.org
 LABEL org.opencontainers.image.documentation=https://docs.kanboard.org
 
-VOLUME /var/www/app/data
-VOLUME /var/www/app/plugins
+VOLUME /var/www/app/kanboard/data
+VOLUME /var/www/app/kanboard/plugins
 VOLUME /etc/nginx/ssl
 
 EXPOSE 80 443
@@ -25,10 +25,10 @@ RUN apk --no-cache --update add \
     rm -f /etc/php83/php-fpm.d/www.conf && \
     ln -sf /usr/bin/php83 /usr/bin/php
 
-ADD . /var/www/app
+ADD . /var/www/app/kanboard
 ADD docker/ /
 
-RUN rm -rf /var/www/app/docker && echo $VERSION > /var/www/app/app/version.txt
+RUN rm -rf /var/www/app/kanboard/docker && echo $VERSION > /var/www/app/kanboard/app/version.txt
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD []
